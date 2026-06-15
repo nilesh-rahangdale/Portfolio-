@@ -37,7 +37,7 @@ const Hero = () => {
           <p style={styles.description} className=" mt-4 mb-4">
             Transforming ideas into scalable products through modern UI experiences, robust backend systems, cloud-native architecture, and blockchain technology.
           </p>
-          <a href="mailto:nileshrahangdale08@gmail.com" style={styles.button} >
+          <a href="#contact" style={styles.button} >
             Let's Connect →
           </a>
         </div>
