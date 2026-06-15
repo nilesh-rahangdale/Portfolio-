@@ -17,14 +17,14 @@ const Contact = () => {
             <span style={styles.arrow}>→</span>
           </a>
 
-          <div style={styles.socialLinks}>
+          <div style={styles.socialLinks} className="flex-col md:flex-row items-center gap-6 md:gap-8">
             <a href="https://github.com/nilesh-rahangdale" target="_blank" rel="noopener noreferrer" style={styles.link}>GitHub</a>
             <a href="https://linkedin.com/in/nilesh-rahangdale" target="_blank" rel="noopener noreferrer" style={styles.link}>LinkedIn</a>
             <a href="https://leetcode.com/u/nileshrahangdale08/" target="_blank" rel="noopener noreferrer" style={styles.link}>LeetCode</a>
           </div>
         </div>
         
-        <div style={styles.bottomBar}>
+        <div style={styles.bottomBar} className="flex-col md:flex-row justify-center md:justify-between text-center md:text-left gap-4 md:gap-4">
           <p style={styles.copyright}>© {new Date().getFullYear()} Nilesh Rahangdale. All rights reserved.</p>
           <p style={styles.location}>Nagpur, Maharashtra, India</p>
         </div>
@@ -77,8 +77,7 @@ const styles = {
   },
   socialLinks: {
     display: 'flex',
-    gap: '32px',
-    flexWrap: 'wrap',
+    // gap and flexWrap moved to tailwind classes
     justifyContent: 'center',
   },
   link: {
@@ -92,10 +91,7 @@ const styles = {
   },
   bottomBar: {
     display: 'flex',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    flexWrap: 'wrap',
-    gap: '16px',
     paddingTop: '32px',
     borderTop: '1px solid var(--border-color)',
     color: 'var(--text-secondary)',

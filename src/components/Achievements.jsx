@@ -40,7 +40,7 @@ const Achievements = () => {
 
         <div style={styles.grid}>
           {achievements.map((item, index) => (
-            <div key={index} style={styles.card}>
+            <div key={index} style={styles.card} className="p-6 md:p-10">
               <div style={styles.cardHeader}>
                 <h3 style={styles.cardTitle}>{item.title}</h3>
                 <span style={styles.cardDate}>{item.date}</span>
@@ -77,12 +77,12 @@ const styles = {
   },
   grid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
     gap: '32px',
   },
   card: {
     background: 'var(--bg-tertiary)',
-    padding: '40px',
+    // padding: '40px', -> moved to tailwind classes
     borderRadius: 'var(--radius-lg)',
     border: '1px solid var(--border-color)',
     display: 'flex',

@@ -8,7 +8,7 @@ const About = () => {
           About <span className="text-italic-serif">Me</span>
         </h2>
         
-        <div style={styles.content}>
+        <div style={styles.content} className="flex flex-col lg:grid lg:grid-cols-2 gap-8 md:gap-16">
           <div style={styles.textContent}>
             <p style={styles.paragraph}>
               With a proven track record of designing and building scalable, secure, and cutting-edge applications, I bring a unique blend of scientific rigor and software craftsmanship. My journey began at the prestigious Defence Research and Development Organisation (DRDO), where I specialized in developing robust systems for DRDO. 
@@ -67,9 +67,7 @@ const styles = {
     textAlign: 'center',
   },
   content: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-    gap: '64px',
+    // Moved to tailwind classes
   },
   textContent: {
     display: 'flex',
