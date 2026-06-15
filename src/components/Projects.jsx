@@ -100,6 +100,7 @@ const Projects = () => {
               <div key={project.id} style={styles.projectWrapper}>
                 {/* Accordion Header */}
                 <div 
+                  className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-0"
                   style={{...styles.projectRow, ...(isExpanded ? styles.projectRowExpanded : {})}} 
                   onClick={() => toggleExpand(project.id)}
                 >
@@ -128,7 +129,7 @@ const Projects = () => {
                   padding: isExpanded ? '40px 0 60px' : '0',
                   pointerEvents: isExpanded ? 'auto' : 'none',
                 }}>
-                  <div style={styles.contentLayout}>
+                  <div style={styles.contentLayout} className="grid grid-cols-1 lg:grid-cols-2">
                     
                     {/* Left Info */}
                     <div style={styles.infoCol}>
@@ -237,7 +238,6 @@ const styles = {
   projectRow: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center',
     padding: '40px 0',
     cursor: 'pointer',
     transition: 'all 0.3s ease',
@@ -305,7 +305,6 @@ const styles = {
   },
   contentLayout: {
     display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
     gap: '60px',
     alignItems: 'start',
   },
@@ -392,12 +391,13 @@ const styles = {
   imageCol: {
     width: '100%',
     height: '100%',
-    minHeight: '400px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   imageContainer: {
     width: '100%',
-    height: '100%',
-    minHeight: '400px',
+    aspectRatio: '16/9',
     background: '#111',
     borderRadius: '24px',
     display: 'flex',

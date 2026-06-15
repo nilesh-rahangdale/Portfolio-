@@ -26,36 +26,21 @@ const Hero = () => {
 
 
       {/* CONTENT */}
-
-      <div style={styles.container}>
-
-
-        <div style={styles.content}>
-
-
-          <h1 style={styles.heading}>
+      <div style={styles.container} >
+        <div style={styles.content} >
+          <h1 style={styles.heading} className="text-[clamp(2rem,6vw,2rem)] tracking-tight mb-2">
             I'm <span>Nilesh Rahangdale</span>
           </h1>
-
-
-          <h2 style={styles.role}>
-            <span className="text-italic-serif">a software developer</span>
+          <h2 style={styles.role} >
+            <span className="text-italic-serif text-[clamp(1rem,4vw,1.5rem)]">a software developer</span>
           </h2>
-
-
-          <p style={styles.description}>
+          <p style={styles.description} className=" mt-4 mb-4">
             Transforming ideas into scalable products through modern UI experiences, robust backend systems, cloud-native architecture, and blockchain technology.
-
           </p>
-
-          <a href="mailto:nileshrahangdale08@gmail.com" style={styles.button}>
+          <a href="#contact" style={styles.button} >
             Let's Connect →
           </a>
-
-
         </div>
-
-
       </div>
 
 

@@ -17,7 +17,7 @@ const Experience = () => {
               <span style={styles.timelineDate}>JAN 2026 - JUN 2026</span>
             </div>
 
-            <div style={styles.timelineContent}>
+            <div style={styles.timelineContent} className="pl-0 md:pl-[76px]">
               <h3 style={styles.jobTitle}>Software Development Intern</h3>
               <p style={styles.companyName}>Scientific Analysis Group (SAG), DRDO, Delhi</p>
 
@@ -50,7 +50,7 @@ const Experience = () => {
               <span style={styles.timelineDate}>JAN 2024 - JUN 2025</span>
             </div>
 
-            <div style={styles.timelineContent}>
+            <div style={styles.timelineContent} className="pl-0 md:pl-[76px]">
               <h3 style={styles.jobTitle}>Technical Committee Head</h3>
               <p style={styles.companyName}>JD College of Engineering & Management, Nagpur</p>
 
@@ -120,10 +120,7 @@ const styles = {
     textTransform: 'uppercase',
   },
   timelineContent: {
-    paddingLeft: '0',
-    '@media (min-width: 768px)': {
-      paddingLeft: '76px', 
-    }
+    // Responsive padding moved to Tailwind class 'pl-0 md:pl-[76px]'
   },
   jobTitle: {
     fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',

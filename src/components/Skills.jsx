@@ -90,7 +90,7 @@ const Skills = () => {
 
         {/* Category Navigation */}
         <div style={styles.navContainer}>
-          <div style={styles.navRow}>
+          <div style={styles.navRow} className="flex-wrap justify-center md:flex-nowrap md:justify-center">
             {skillCategories.map((category, index) => {
               const isActive = activeCategory === index;
               return (
