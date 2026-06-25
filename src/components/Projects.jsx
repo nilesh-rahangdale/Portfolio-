@@ -39,6 +39,23 @@ const Projects = () => {
     },
     {
       id: "03",
+      title: "Banking Management System",
+      subtitle: "SECURE BANKING APPLICATION",
+      techShort: ["JAVA", "SPRING BOOT", "HIBERNATE", "PostgreSQL"],
+      description: "Developed a secure banking application to manage core banking operations with a focus on authentication, transaction handling, and data security.",
+      features: [
+        "Secure user authentication and authorization using Spring Security and JWT",
+        "REST APIs for managing customer accounts and banking operations",
+        "Database interactions using Hibernate/JPA with PostgreSQL",
+        "Modular backend architecture for scalable transactions"
+      ],
+      technologies: ["Java", "Spring Boot", "REST APIs", "Spring Security", "JWT", "Hibernate/JPA", "PostgreSQL"],
+      repoUrl: "https://github.com/nilesh-rahangdale/Niyora-Bank",
+      // imgUrl: "N/A",
+      featured: false
+    },
+    {
+      id: "04",
       title: "Microservices-Based Quiz Application",
       subtitle: "DISTRIBUTED QUIZ PLATFORM",
       techShort: ["SPRING BOOT", "EUREKA", "OPENFEIGN", "GATEWAY"],
@@ -53,23 +70,7 @@ const Projects = () => {
       repoUrl: "https://github.com/nilesh-rahangdale",
       // imgUrl: "N/A",
       featured: false
-    },
-    {
-      id: "04",
-      title: "Banking Management System",
-      subtitle: "SECURE BANKING APPLICATION",
-      techShort: ["JAVA", "SPRING BOOT", "HIBERNATE", "PostgreSQL"],
-      description: "Developed a secure banking application to manage core banking operations with a focus on authentication, transaction handling, and data security.",
-      features: [
-        "Secure user authentication and authorization using Spring Security and JWT",
-        "REST APIs for managing customer accounts and banking operations",
-        "Database interactions using Hibernate/JPA with PostgreSQL",
-        "Modular backend architecture for scalable transactions"
-      ],
-      technologies: ["Java", "Spring Boot", "REST APIs", "Spring Security", "JWT", "Hibernate/JPA", "PostgreSQL"],
-      repoUrl: "https://github.com/nilesh-rahangdale/E-Banking-System",
-      // imgUrl: "N/A",
-      featured: false
+
     }
   ];
 
@@ -82,14 +83,14 @@ const Projects = () => {
   return (
     <section id="projects" className="section fade-in" style={styles.section}>
       <div className="container" style={styles.container}>
-        
+
         <div style={styles.header}>
           <h2 style={styles.sectionTitle}>
-            Featured<br/>
+            Featured<br />
             <span className="text-italic-serif" style={styles.titleSerif}>Projects</span>
           </h2>
           <p style={styles.headerDesc}>
-           Showcasing projects that combine scalable architecture, clean engineering, and real-world problem solving.
+            Showcasing projects that combine scalable architecture, clean engineering, and real-world problem solving.
           </p>
         </div>
 
@@ -99,16 +100,16 @@ const Projects = () => {
             return (
               <div key={project.id} style={styles.projectWrapper}>
                 {/* Accordion Header */}
-                <div 
+                <div
                   className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-0"
-                  style={{...styles.projectRow, ...(isExpanded ? styles.projectRowExpanded : {})}} 
+                  style={{ ...styles.projectRow, ...(isExpanded ? styles.projectRowExpanded : {}) }}
                   onClick={() => toggleExpand(project.id)}
                 >
                   <div style={styles.rowLeft}>
                     <span style={styles.projectId}>{project.id}</span>
-                    <h3 style={{...styles.projectTitleRow, ...(isExpanded ? styles.projectTitleRowExpanded : {})}}>{project.title}</h3>
+                    <h3 style={{ ...styles.projectTitleRow, ...(isExpanded ? styles.projectTitleRowExpanded : {}) }}>{project.title}</h3>
                   </div>
-                  
+
                   <div style={styles.rowRight}>
                     <div style={styles.techTagsRow}>
                       {project.techShort.map((tech, i) => (
@@ -130,12 +131,12 @@ const Projects = () => {
                   pointerEvents: isExpanded ? 'auto' : 'none',
                 }}>
                   <div style={styles.contentLayout} className="grid grid-cols-1 lg:grid-cols-2">
-                    
+
                     {/* Left Info */}
                     <div style={styles.infoCol}>
                       <h4 style={styles.subTitle}>{project.subtitle}</h4>
                       <p style={styles.description}>{project.description}</p>
-                      
+
                       <div style={styles.featuresSection}>
                         <h5 style={styles.listHeading}>KEY FEATURES:</h5>
                         <ul style={styles.featureList}>
