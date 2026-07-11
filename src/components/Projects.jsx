@@ -51,7 +51,7 @@ const Projects = () => {
       ],
       technologies: ["Java", "Spring Boot", "REST APIs", "Spring Security", "JWT", "Hibernate/JPA", "PostgreSQL"],
       repoUrl: "https://github.com/nilesh-rahangdale/Niyora-Bank",
-      // imgUrl: "N/A",
+      imgUrl: "/niyora_bank.png",
       featured: false
     },
     {
