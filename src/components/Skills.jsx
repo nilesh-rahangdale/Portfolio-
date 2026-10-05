@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useScrollReveal, revealStyle } from '../hooks/useScrollReveal';
+
 
 // Inline SVGs for categories
 const CodeIcon = () => (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>);
@@ -76,10 +78,14 @@ const Skills = () => {
 
   const currentCategory = skillCategories[activeCategory];
 
+  const { ref: headRef, visible: headVisible } = useScrollReveal();
+  const { ref: navRef,  visible: navVisible  } = useScrollReveal({ rootMargin: '0px 0px -40px 0px' });
+  const { ref: gridRef, visible: gridVisible  } = useScrollReveal({ rootMargin: '0px 0px -40px 0px' });
+
   return (
     <section id="skills" className="section fade-in" style={styles.section}>
       <div className="container" style={styles.container}>
-        <div style={styles.header}>
+        <div ref={headRef} style={{ ...styles.header, ...revealStyle(headVisible, 0, 'up', 700) }}>
           <h2 style={styles.sectionTitle}>
             Skills & <span className="text-italic-serif">Technologies</span>
           </h2>
@@ -89,7 +95,7 @@ const Skills = () => {
         </div>
 
         {/* Category Navigation */}
-        <div style={styles.navContainer}>
+        <div ref={navRef} style={{ ...styles.navContainer, ...revealStyle(navVisible, 80, 'up', 650) }}>
           <div style={styles.navRow} className="flex-wrap justify-center md:flex-nowrap md:justify-center">
             {skillCategories.map((category, index) => {
               const isActive = activeCategory === index;
@@ -116,7 +122,8 @@ const Skills = () => {
         </div>
 
         {/* Skills Display Area */}
-        <div style={styles.displayArea}>
+        <div ref={gridRef} style={{ ...styles.displayArea, ...revealStyle(gridVisible, 120, 'scale', 600) }}>
+
           <div style={styles.bgNumber}>
             0{currentCategory.skills.length}
           </div>

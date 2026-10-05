@@ -1,4 +1,91 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useScrollReveal, revealStyle } from '../hooks/useScrollReveal';
+
+/* ── Per-project row reveal ── */
+const ProjectRow = ({ project, index, expandedId, onToggle }) => {
+  const { ref, visible } = useScrollReveal({ rootMargin: '0px 0px -40px 0px' });
+  const isExpanded = expandedId === project.id;
+
+  return (
+    <div ref={ref} style={{ ...styles.projectWrapper, ...revealStyle(visible, index * 100, 'up', 650) }}>
+      {/* Accordion Header */}
+      <div
+        className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-0"
+        style={{ ...styles.projectRow, ...(isExpanded ? styles.projectRowExpanded : {}) }}
+        onClick={() => onToggle(project.id)}
+      >
+        <div style={styles.rowLeft}>
+          <span style={styles.projectId}>{project.id}</span>
+          <h3 style={{ ...styles.projectTitleRow, ...(isExpanded ? styles.projectTitleRowExpanded : {}) }}>{project.title}</h3>
+        </div>
+
+        <div style={styles.rowRight}>
+          <div style={styles.techTagsRow}>
+            {project.techShort.map((tech, i) => (
+              <span key={i} style={styles.techTag}>→ {tech}</span>
+            ))}
+          </div>
+          <button style={styles.toggleBtn}>
+            {isExpanded ? '×' : '+'}
+          </button>
+        </div>
+      </div>
+
+      {/* Accordion Content */}
+      <div style={{
+        ...styles.projectContent,
+        maxHeight: isExpanded ? '1000px' : '0',
+        opacity: isExpanded ? 1 : 0,
+        padding: isExpanded ? '40px 0 60px' : '0',
+        pointerEvents: isExpanded ? 'auto' : 'none',
+      }}>
+        <div style={styles.contentLayout} className="grid grid-cols-1 lg:grid-cols-2">
+          {/* Left Info */}
+          <div style={styles.infoCol}>
+            <h4 style={styles.subTitle}>{project.subtitle}</h4>
+            <p style={styles.description}>{project.description}</p>
+
+            <div style={styles.featuresSection}>
+              <h5 style={styles.listHeading}>KEY FEATURES:</h5>
+              <ul style={styles.featureList}>
+                {project.features.map((feature, i) => (
+                  <li key={i} style={styles.featureItem}>
+                    <span style={styles.dot}>.</span> {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div style={styles.technologiesSection}>
+              <h5 style={styles.listHeading}>TECHNOLOGIES USED:</h5>
+              <div style={styles.techPills}>
+                {project.technologies.map((tech, i) => (
+                  <span key={i} style={styles.techPill}>{tech}</span>
+                ))}
+              </div>
+            </div>
+
+            <a href={project.repoUrl} target="_blank" rel="noreferrer" style={styles.repoBtn}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              View Repository
+            </a>
+          </div>
+
+          {/* Right Image */}
+          <div style={styles.imageCol}>
+            <div style={styles.imageContainer}>
+              {project.imgUrl ? (
+                <img src={project.imgUrl} alt={`${project.title} preview`} style={styles.projectImage} />
+              ) : (
+                <span style={styles.placeholderText}>{project.title} Preview</span>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Projects = () => {
   const [expandedId, setExpandedId] = useState(null);
@@ -80,105 +167,39 @@ const Projects = () => {
     setExpandedId(expandedId === id ? null : id);
   };
 
+  const { ref: headRef, visible: headVisible } = useScrollReveal();
+  const { ref: descRef, visible: descVisible } = useScrollReveal({ rootMargin: '0px 0px -30px 0px' });
+
   return (
     <section id="projects" className="section fade-in" style={styles.section}>
       <div className="container" style={styles.container}>
 
         <div style={styles.header}>
-          <h2 style={styles.sectionTitle}>
+          <h2
+            ref={headRef}
+            style={{ ...styles.sectionTitle, ...revealStyle(headVisible, 0, 'up', 750) }}
+          >
             Featured<br />
             <span className="text-italic-serif" style={styles.titleSerif}>Projects</span>
           </h2>
-          <p style={styles.headerDesc}>
+          <p
+            ref={descRef}
+            style={{ ...styles.headerDesc, ...revealStyle(descVisible, 100, 'up', 700) }}
+          >
             Showcasing projects that combine scalable architecture, clean engineering, and real-world problem solving.
           </p>
         </div>
 
         <div style={styles.projectsList}>
-          {visibleProjects.map((project) => {
-            const isExpanded = expandedId === project.id;
-            return (
-              <div key={project.id} style={styles.projectWrapper}>
-                {/* Accordion Header */}
-                <div
-                  className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-0"
-                  style={{ ...styles.projectRow, ...(isExpanded ? styles.projectRowExpanded : {}) }}
-                  onClick={() => toggleExpand(project.id)}
-                >
-                  <div style={styles.rowLeft}>
-                    <span style={styles.projectId}>{project.id}</span>
-                    <h3 style={{ ...styles.projectTitleRow, ...(isExpanded ? styles.projectTitleRowExpanded : {}) }}>{project.title}</h3>
-                  </div>
-
-                  <div style={styles.rowRight}>
-                    <div style={styles.techTagsRow}>
-                      {project.techShort.map((tech, i) => (
-                        <span key={i} style={styles.techTag}>→ {tech}</span>
-                      ))}
-                    </div>
-                    <button style={styles.toggleBtn}>
-                      {isExpanded ? '×' : '+'}
-                    </button>
-                  </div>
-                </div>
-
-                {/* Accordion Content */}
-                <div style={{
-                  ...styles.projectContent,
-                  maxHeight: isExpanded ? '1000px' : '0',
-                  opacity: isExpanded ? 1 : 0,
-                  padding: isExpanded ? '40px 0 60px' : '0',
-                  pointerEvents: isExpanded ? 'auto' : 'none',
-                }}>
-                  <div style={styles.contentLayout} className="grid grid-cols-1 lg:grid-cols-2">
-
-                    {/* Left Info */}
-                    <div style={styles.infoCol}>
-                      <h4 style={styles.subTitle}>{project.subtitle}</h4>
-                      <p style={styles.description}>{project.description}</p>
-
-                      <div style={styles.featuresSection}>
-                        <h5 style={styles.listHeading}>KEY FEATURES:</h5>
-                        <ul style={styles.featureList}>
-                          {project.features.map((feature, i) => (
-                            <li key={i} style={styles.featureItem}>
-                              <span style={styles.dot}>.</span> {feature}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <div style={styles.technologiesSection}>
-                        <h5 style={styles.listHeading}>TECHNOLOGIES USED:</h5>
-                        <div style={styles.techPills}>
-                          {project.technologies.map((tech, i) => (
-                            <span key={i} style={styles.techPill}>{tech}</span>
-                          ))}
-                        </div>
-                      </div>
-
-                      <a href={project.repoUrl} target="_blank" rel="noreferrer" style={styles.repoBtn}>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                        View Repository
-                      </a>
-                    </div>
-
-                    {/* Right Image */}
-                    <div style={styles.imageCol}>
-                      <div style={styles.imageContainer}>
-                        {project.imgUrl ? (
-                          <img src={project.imgUrl} alt={`${project.title} preview`} style={styles.projectImage} />
-                        ) : (
-                          <span style={styles.placeholderText}>{project.title} Preview</span>
-                        )}
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            )
-          })}
+          {visibleProjects.map((project, i) => (
+            <ProjectRow
+              key={project.id}
+              project={project}
+              index={i}
+              expandedId={expandedId}
+              onToggle={toggleExpand}
+            />
+          ))}
         </div>
 
         <div style={styles.exploreContainer}>

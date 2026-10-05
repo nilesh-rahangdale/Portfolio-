@@ -132,18 +132,42 @@ ul, ol {
   background: #333;
 }
 
-/* Animations */
+/* ── Scroll-driven section reveal (handled by JS IntersectionObserver) ── */
+/* The .fade-in class is kept for legacy sections; new animations use inline styles via useScrollReveal */
 .fade-in {
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeIn 0.8s ease-out forwards;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.fade-in.is-visible {
+  opacity: 1;
+  transform: none;
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
+/* ── Hero entrance animations ── */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.hero-line-1 { animation: heroFadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.15s both; }
+.hero-line-2 { animation: heroFadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.30s both; }
+.hero-line-3 { animation: heroFadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.45s both; }
+.hero-btn    { animation: heroFadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.60s both; }
+
+/* ── Reduced-motion: collapse all animations ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
+  .fade-in { opacity: 1; transform: none; }
 }
 
 
