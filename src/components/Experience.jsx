@@ -1,76 +1,90 @@
 import React from 'react';
+import { useScrollReveal, revealStyle } from '../hooks/useScrollReveal';
+
+/* ── Animated timeline item ── */
+const TimelineItem = ({ number, date, title, company, bullets, index }) => {
+  const { ref, visible } = useScrollReveal({ rootMargin: '0px 0px -60px 0px' });
+  return (
+    <div
+      ref={ref}
+      style={{
+        ...styles.timelineItem,
+        ...revealStyle(visible, index * 150, 'up', 700),
+      }}
+    >
+      <div style={styles.timelineMeta}>
+        <span style={styles.timelineNumber}>{number}</span>
+        <span style={styles.timelineLine}></span>
+        <span style={styles.timelineDate}>{date}</span>
+      </div>
+
+      <div style={styles.timelineContent} className="pl-0 md:pl-[76px]">
+        <h3 style={styles.jobTitle}>{title}</h3>
+        <p style={styles.companyName}>{company}</p>
+
+        <ul style={styles.jobDescription}>
+          {bullets.map((b, i) => (
+            <li
+              key={i}
+              style={{
+                ...styles.bulletPoint,
+                ...revealStyle(visible, index * 150 + 80 + i * 60, 'up', 500),
+              }}
+            >
+              <span style={styles.bulletIcon}>++</span>
+              <span>{b}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+};
 
 const Experience = () => {
+  const { ref: headRef, visible: headVisible } = useScrollReveal();
+
+  const items = [
+    {
+      number: '01',
+      date: 'JAN 2026 - JUN 2026',
+      title: 'Software Development Intern',
+      company: 'Scientific Analysis Group (SAG), DRDO, Delhi',
+      bullets: [
+        'Developed an Internship and Digital Certificate Management System for the HR department using Java, Spring Boot, REST APIs, PostgreSQL, Hibernate/JPA, Spring Security and React to automate intern onboarding, tracking, and certificate generation workflows.',
+        'Integrated Hyperledger Fabric and QR-based verification mechanisms to provide tamper-proof certificate validation, reducing manual verification effort by approximately 90%.',
+        'Containerized application services using Docker and worked in a Linux-based environment for development, testing, and deployment activities.',
+        'Configured Nginx as a reverse proxy for routing requests to backend services and improving application accessibility.',
+      ],
+    },
+    {
+      number: '02',
+      date: 'JAN 2024 - JUN 2025',
+      title: 'Technical Committee Head',
+      company: 'JD College of Engineering & Management, Nagpur',
+      bullets: [
+        'I led the college\'s tech team, organizing exciting events and projects that brought students together to innovate and learn.',
+        'My role was to plan, coordinate, and make sure everything ran smoothly, all while encouraging everyone to think creatively and grow their technical skills.',
+        'It was about building a smart, collaborative tech community!',
+      ],
+    },
+  ];
+
   return (
     <section id="experience" className="section fade-in" style={styles.section}>
       <div className="container" style={styles.container}>
-        <h2 style={styles.sectionTitle}>
+
+        <h2
+          ref={headRef}
+          style={{ ...styles.sectionTitle, ...revealStyle(headVisible, 0, 'up', 700) }}
+        >
           My <span className="text-italic-serif">Journey</span>
         </h2>
 
         <div style={styles.timeline}>
-          {/* Experience Item 1*/}
-          <div style={styles.timelineItem}>
-            <div style={styles.timelineMeta}>
-              <span style={styles.timelineNumber}>01</span>
-              <span style={styles.timelineLine}></span>
-              <span style={styles.timelineDate}>JAN 2026 - JUN 2026</span>
-            </div>
-
-            <div style={styles.timelineContent} className="pl-0 md:pl-[76px]">
-              <h3 style={styles.jobTitle}>Software Development Intern</h3>
-              <p style={styles.companyName}>Scientific Analysis Group (SAG), DRDO, Delhi</p>
-
-              <ul style={styles.jobDescription}>
-                <li style={styles.bulletPoint}>
-                  <span style={styles.bulletIcon}>++</span>
-                  <span>Developed an Internship and Digital Certificate Management System for the HR department using Java, Spring Boot, REST APIs, PostgreSQL, Hibernate/JPA, Spring Security and React to automate intern onboarding, tracking, and certificate generation workflows.</span>
-                </li>
-                <li style={styles.bulletPoint}>
-                  <span style={styles.bulletIcon}>++</span>
-                  <span>Integrated Hyperledger Fabric and QR-based verification mechanisms to provide tamper-proof certificate validation, reducing manual verification effort by approximately 90%.</span>
-                </li>
-                <li style={styles.bulletPoint}>
-                  <span style={styles.bulletIcon}>++</span>
-                  <span>Containerized application services using Docker and worked in a Linux-based environment for development, testing, and deployment activities.</span>
-                </li>
-                <li style={styles.bulletPoint}>
-                  <span style={styles.bulletIcon}>++</span>
-                  <span>Configured Nginx as a reverse proxy for routing requests to backend services and improving application accessibility.</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Experience Item 2*/}
-          <div style={styles.timelineItem}>
-            <div style={styles.timelineMeta}>
-              <span style={styles.timelineNumber}>02</span>
-              <span style={styles.timelineLine}></span>
-              <span style={styles.timelineDate}>JAN 2024 - JUN 2025</span>
-            </div>
-
-            <div style={styles.timelineContent} className="pl-0 md:pl-[76px]">
-              <h3 style={styles.jobTitle}>Technical Committee Head</h3>
-              <p style={styles.companyName}>JD College of Engineering & Management, Nagpur</p>
-
-              <ul style={styles.jobDescription}>
-                <li style={styles.bulletPoint}>
-                  <span style={styles.bulletIcon}>++</span>
-                  <span>I led the college’s tech team, organizing exciting events and projects that brought students together to innovate and learn.  </span>
-                </li>
-                <li style={styles.bulletPoint}>
-                  <span style={styles.bulletIcon}>++</span>
-                  <span>My role was to plan, coordinate, and make sure everything ran smoothly, all while encouraging everyone to think creatively and grow their technical skills.</span>
-                </li>
-                <li style={styles.bulletPoint}>
-                  <span style={styles.bulletIcon}>++</span>
-                  <span>It was about building a smart, collaborative tech community!</span>
-                </li>
-                
-              </ul>
-            </div>
-          </div>
+          {items.map((item, i) => (
+            <TimelineItem key={item.number} {...item} index={i} />
+          ))}
         </div>
       </div>
     </section>
@@ -119,9 +133,7 @@ const styles = {
   timelineDate: {
     textTransform: 'uppercase',
   },
-  timelineContent: {
-    // Responsive padding moved to Tailwind class 'pl-0 md:pl-[76px]'
-  },
+  timelineContent: {},
   jobTitle: {
     fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
     color: 'var(--text-primary)',
@@ -152,7 +164,8 @@ const styles = {
     fontFamily: 'var(--font-serif)',
     fontSize: '0.875rem',
     marginTop: '4px',
-  }
+    flexShrink: 0,
+  },
 };
 
 export default Experience;

@@ -28,16 +28,16 @@ const Hero = () => {
       {/* CONTENT */}
       <div style={styles.container} >
         <div style={styles.content} >
-          <h1 style={styles.heading} className="text-[clamp(2rem,6vw,2rem)] tracking-tight mb-2">
+          <h1 style={styles.heading} className="hero-line-1 text-[clamp(2rem,6vw,2rem)] tracking-tight mb-2">
             I'm <span>Nilesh Rahangdale</span>
           </h1>
-          <h2 style={styles.role} >
+          <h2 style={styles.role} className="hero-line-2">
             <span className="text-italic-serif text-[clamp(1rem,4vw,1.5rem)]">a software developer</span>
           </h2>
-          <p style={styles.description} className=" mt-4 mb-4">
+          <p style={styles.description} className="hero-line-3 mt-4 mb-4">
             Transforming ideas into scalable products through modern UI experiences, robust backend systems, cloud-native architecture, and blockchain technology.
           </p>
-          <a href="#contact" style={styles.button} >
+          <a href="#contact" style={styles.button} className="hero-btn">
             Let's Connect →
           </a>
         </div>
