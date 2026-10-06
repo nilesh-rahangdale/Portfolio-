@@ -26,7 +26,7 @@ const achievements = [
     subtitle: "Hackathon Judge",
     description:
       "Served as a Judge for VORTEX Hackathon 2026, assessing student-built solutions for innovation, technical depth, problem-solving, feasibility, and real-world impact.",
-    image: "/Vortex_2026.jpg",
+    image: "/Vortex_2026.png",
     tag: "Judge",
   },
   {
