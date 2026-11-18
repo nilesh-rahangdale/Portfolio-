@@ -47,6 +47,19 @@ const Experience = () => {
   const items = [
     {
       number: '01',
+      date: 'AUG 2026 - PRESENT',
+      title: 'Program Mentor',
+      company: 'InUnity Private Limited',
+      bullets: [
+        'Facilitate industry-driven, project-based learning by collaborating with MSMEs to bring real-world industrial problem statements to engineering students and translate them into practical development projects.',
+        'Train and mentor student teams in Design Thinking, structured problem-solving frameworks, secondary research, root-cause analysis, ideation, and solution validation.',
+        'Guide teams through rapid prototyping, proof-of-concept (PoC) development, and hands-on implementation of engineering solutions to address industry challenges.',
+        'Support student innovation journeys across pre-incubation and incubation, including Technology Readiness Level (TRL) progression, MVP development, and product development.',
+        'Coordinate with MSMEs, institutional stakeholders, and multidisciplinary student teams to align proposed solutions with industry requirements and practical feasibility.'
+      ],
+    },
+    {
+      number: '02',
       date: 'JAN 2026 - JUN 2026',
       title: 'Software Development Intern',
       company: 'Scientific Analysis Group (SAG), DRDO, Delhi',
@@ -58,7 +71,7 @@ const Experience = () => {
       ],
     },
     {
-      number: '02',
+      number: '03',
       date: 'JAN 2024 - JUN 2025',
       title: 'Technical Committee Head',
       company: 'JD College of Engineering & Management, Nagpur',
